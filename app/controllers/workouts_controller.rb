@@ -3,7 +3,7 @@ class WorkoutsController < ApplicationController
     before_action :find_workout, only: [:show, :edit, :update, :destroy]
 
 	def index
-		
+		@workouts = Workout.all
 	end
 
 	def show
@@ -15,7 +15,7 @@ class WorkoutsController < ApplicationController
 	end
 
 	def create
-		@workout = Workout.new(workou_prams)
+		@workout = Workout.new(workout_prams)
 		if @workout.save
 			redirect_to @workout
 		else
@@ -28,16 +28,21 @@ class WorkoutsController < ApplicationController
 	end
 
 	def update
-		
+		if @workout.update(workout_prams)
+			redirect_to @workout
+			else
+				render 'edit'
+			end
 	end
 
 	def destroy
-		
+		@workout.destroy
+		redirect_to root_path
 	end
 
 	private
 
-	def workou_prams
+	def workout_prams
 		params.require(:workout).permit(:date, :workout, :mood, :length)
 	end
 
