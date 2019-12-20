@@ -20,7 +20,7 @@ RSpec.describe WorkoutsController, type: :controller do
 
 	context 'GET #index' do
 		it 'should create new' do
-			visit new_workout
+			visit new_workout_path
 
 			fill_in "workout", with: "running"
 			fill_in "mood", with: "lazy"
@@ -32,7 +32,7 @@ RSpec.describe WorkoutsController, type: :controller do
 
 	context 'GET #index' do
 		it 'should update' do
-			visit edit_workout_path
+			visit edit_workout_path(workout.id)
 
 			fill_in "workout", with: "swimming"
 			fill_in "mood", with: "tired"
