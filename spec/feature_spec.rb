@@ -26,8 +26,8 @@ RSpec.feature "Features", type: :feature do
 			click_button "Update Workout"
 
 			expect(workout.reload.workout).to eq "swimming"
-			expect(worout.mood).to eq "tired"	
-			expect(worout.length).to eq "30min"
+			expect(workout.mood).to eq "tired"	
+			expect(workout.length).to eq "30min"
 		end
 	end
 
