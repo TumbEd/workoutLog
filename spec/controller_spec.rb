@@ -1,4 +1,4 @@
-require './rails_helper'
+require './spec/rails_helper'
 
 RSpec.describe WorkoutsController, type: :controller do
 	#Passes \/

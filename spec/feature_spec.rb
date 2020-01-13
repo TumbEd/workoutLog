@@ -1,16 +1,16 @@
-require './rails_helper'
+require './spec/rails_helper'
 require 'capybara/rspec'
 
 RSpec.feature "Features", type: :feature do
 	#problemas ar workout. \/
 	given!(:workout) { Workout.new(date: Date.today, workout: 'running', mood: 'lazy', length: '20min') }
- 
+
 	scenario 'with valid credentials' do
 		visit new_workout_path
 
-		fill_in 'workout', :with workout.workout
-		fill_in 'mood', :with workout.mood
-		fill_in 'length', :with workout.length
+		fill_in 'workout', with: workout.workout
+		fill_in 'mood', with: workout.mood
+		fill_in 'length', with: workout.length
 		click_button 'Create Workout'
 
 		expect(page).to have_content "Add an exercise"
@@ -20,9 +20,9 @@ RSpec.feature "Features", type: :feature do
 		it 'should create new' do
 			visit "/workouts/new"
 
-			fill_in "workout", :with "running"
-			fill_in "mood", :with "lazy"
-			fill_in "length", :with "60min"
+			fill_in "workout", with: "running"
+			fill_in "mood", with: "lazy"
+			fill_in "length", with: "60min"
 
 			click_button "Create Workout"
 
@@ -42,7 +42,7 @@ RSpec.feature "Features", type: :feature do
 			click_button "Update Workout"
 
 			expect(workout.reload.workout).to eq "swimming"
-			expect(workout.mood).to eq "tired"	
+			expect(workout.mood).to eq "tired"
 			expect(workout.length).to eq "30min"
 		end
 	end
