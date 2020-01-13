@@ -8,9 +8,9 @@ RSpec.feature "Features", type: :feature do
 	scenario 'with valid credentials' do
 		visit new_workout_path
 
-		fill_in 'workout', with: workout.workout
-		fill_in 'mood', with: workout.mood
-		fill_in 'length', with: workout.length
+		fill_in 'workout[workout]', with: workout.workout
+		fill_in 'workout[mood]', with: workout.mood
+		fill_in 'workout[length]', with: workout.length
 		click_button 'Create Workout'
 
 		expect(page).to have_content "Add an exercise"
