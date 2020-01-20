@@ -2,7 +2,7 @@ require './spec/rails_helper'
 require 'capybara/rspec'
 
 RSpec.feature "Features", type: :feature do
-	#Ambiguous match, found 2 elements matching visible xpath "/html" \/
+	#passes \/
 	given!(:workout) { Workout.new(date: Date.today, workout: 'running', mood: 'lazy', length: '20min') }
 
 	scenario 'with valid credentials' do
@@ -15,7 +15,6 @@ RSpec.feature "Features", type: :feature do
 
 		expect(page).to have_content 'Add an exercise'
 	end
-	#passes \/
   	describe 'GET #index' do
 		it 'should create new' do
 			visit "/workouts/new"
