@@ -26,11 +26,11 @@ RSpec.feature "Features", type: :feature do
 			expect { click_button 'Create Workout' }.to change(Workout, :count).by(1)
 		end
 	end
-	#No route matches {:action=>"edit", :controller=>"workouts", :id=>#<Workout id: nil, date: "2020-01-15 00:00:00", workout: "running", mood: "lazy", length: "20min", created_at: nil, updated_at: nil>}, possible unmatched constraints: [:id] \/
+	#Couldn't find Workout with 'id'=:id
 	describe 'GET #index' do
 		it 'should update' do
 			workout = Workout.new(date: Date.today, workout: 'running', mood: 'lazy', length: '20min')
-			visit edit_workout_path(workout)
+			visit '/workouts/:id/edit'
 
 			fill_in 'workout[workout]', with: "running"
 			fill_in 'workout[mood]', with: "lazy"
@@ -43,12 +43,12 @@ RSpec.feature "Features", type: :feature do
 			expect(workout.length).to eq "30min"
 		end
 	end
-	#No route matches {:action=>"show", :controller=>"workouts", :id=>nil}, possible unmatched constraints: [:id] \/
+	#Couldn't find Workout with 'id'=:id
 	describe 'GET #index' do
 		it 'should delete' do
 			workout = Workout.new(date: Date.today, workout: 'running', mood: 'lazy', length: '20min')
 
-			visit workout_path(workout.id)
+			visit '/workouts/:id'
 
 			page.should have_link("Delete")
 
