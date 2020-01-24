@@ -26,33 +26,34 @@ RSpec.feature "Features", type: :feature do
 			expect { click_button 'Create Workout' }.to change(Workout, :count).by(1)
 		end
 	end
-	#Couldn't find Workout with 'id'=:id
+	#Couldn't find Workout with 'id'=edit
 	describe 'GET #index' do
 		it 'should update' do
 			workout = Workout.new(date: Date.today, workout: 'running', mood: 'lazy', length: '20min')
-			visit '/workouts/:id/edit'
 
-			fill_in 'workout[workout]', with: "running"
-			fill_in 'workout[mood]', with: "lazy"
-			fill_in 'workout[length]', with: "60min"
+			#visit "/workouts/#{workout.id}/edit"
+			visit "/workouts/7/edit"
+
+			fill_in 'workout[workout]', with: workout.workout
+			fill_in 'workout[mood]', with: workout.mood 
+			fill_in 'workout[length]', with: workout.length
 
 			click_button 'Update Workout'
 
-			expect(workout.reload.workout).to eq "swimming"
-			expect(workout.mood).to eq "tired"
-			expect(workout.length).to eq "30min"
+			expect(workout[workout]).to eq "swimming"
+			expect(workout[mood]).to eq "tired"
+			expect(workout[length]).to eq "30min"
 		end
 	end
-	#Couldn't find Workout with 'id'=:id
+	#Unable to find visible link or button "Delete"
 	describe 'GET #index' do
 		it 'should delete' do
 			workout = Workout.new(date: Date.today, workout: 'running', mood: 'lazy', length: '20min')
 
-			visit '/workouts/:id'
+			#visit "/workouts/#{workout.id}"
+			visit "/workouts/6"
 
-			page.should have_link("Delete")
-
-			expect { click_link "Delete" }.to change(Workout, :count).by(-1)
+			expect { click_on 'Delete' }.to change(Workout, :count).by(-1)
 		end
 	end
 end
