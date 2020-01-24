@@ -26,32 +26,30 @@ RSpec.feature "Features", type: :feature do
 			expect { click_button 'Create Workout' }.to change(Workout, :count).by(1)
 		end
 	end
-	#Couldn't find Workout with 'id'=edit
 	describe 'GET #index' do
 		it 'should update' do
 			workout = Workout.new(date: Date.today, workout: 'running', mood: 'lazy', length: '20min')
+			workout.save
 
-			#visit "/workouts/#{workout.id}/edit"
-			visit "/workouts/7/edit"
+			visit "/workouts/#{workout.id}/edit"
 
-			fill_in 'workout[workout]', with: workout.workout
-			fill_in 'workout[mood]', with: workout.mood 
-			fill_in 'workout[length]', with: workout.length
+			fill_in 'workout[workout]', with: "swimming"
+			fill_in 'workout[mood]', with: "tired"
+			fill_in 'workout[length]', with: "30min"
 
 			click_button 'Update Workout'
 
-			expect(workout[workout]).to eq "swimming"
-			expect(workout[mood]).to eq "tired"
-			expect(workout[length]).to eq "30min"
+			expect(page).to have_content 'swimming'
+			expect(page).to have_content 'tired'
+			expect(page).to have_content '30min'
 		end
 	end
-	#Unable to find visible link or button "Delete"
 	describe 'GET #index' do
 		it 'should delete' do
 			workout = Workout.new(date: Date.today, workout: 'running', mood: 'lazy', length: '20min')
+			workout.save
 
-			#visit "/workouts/#{workout.id}"
-			visit "/workouts/6"
+			visit "/workouts/#{workout.id}"
 
 			expect { click_on 'Delete' }.to change(Workout, :count).by(-1)
 		end
