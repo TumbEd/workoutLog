@@ -11,6 +11,9 @@
    .navbar-header
     = link_to "Workout Log", root_path, class: "navbar-brand"
    .nav.navbar-nav.navbar-right
-    = link_to "New Workout", new_workout_path, class: "navbar-brand" 
+    - if current_user
+     = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: "navbar-brand"
+    - else 
+     = link_to "Logout", destroy_user_session_path, method: :delete, class: "navbar-brand"
  .container
  = yield  

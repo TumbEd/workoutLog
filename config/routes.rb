@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get '/auth/facebook/callback', to: redirect('/')
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 	resources :workouts do
 		resources :exercises
 	end
